@@ -1,0 +1,133 @@
+@extends('admin.layouts.app')
+
+@section('title', 'Create Product - Shoes World Dashboard')
+
+@section('content')
+    <div class="container">
+        <div class="row d-flex justify-content-center">
+            <div class="col-md-10 mt-5">
+                <div class="card border-0 shadow-lg">
+                    <div class="card-header bg-dark text-white">
+                        <div class="row">
+                            <div class="col-11">
+                                <h3 class="h5 pt-2">Create Product:</h3>
+                            </div>
+                            <div class="col-1">
+                                <div>
+                                    <a href="{{ route('product.index') }}" class="btn btn-primary">Back</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <form action="{{ route('product.store') }}" method="POST" enctype="multipart/form-data">
+                            @csrf
+                            <div class="mb-3">
+                                <label for="title" class="form-label">Title</label>
+                                <input type="text" value="{{ old('title') }}"
+                                    class="form-control @error('title') is-invalid @enderror" id="title" name="title"
+                                    placeholder="Enter product title" required>
+                                @error('title')
+                                    <p class="invalid-feedback">{{ $message }}</p>
+                                @enderror
+                            </div>
+                            <div class="mb-3">
+                                <label for="category_id" class="form-label">Category</label>
+                                <select class="form-control @error('category_id') is-invalid @enderror" id="category_id"
+                                    name="category_id" required>
+                                    <option value="">Select Category</option>
+                                    @foreach ($categories as $category)
+                                        <option value="{{ $category->id }}"
+                                            {{ old('category_id') == $category->id ? 'selected' : '' }}>
+                                            {{ $category->name }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                                @error('category_id')
+                                    <p class="invalid-feedback">{{ $message }}</p>
+                                @enderror
+                            </div>
+                            <div class="mb-3">
+                                <label for="brand_id" class="form-label">Brand</label>
+                                <select class="form-control @error('brand_id') is-invalid @enderror" id="brand_id"
+                                    name="brand_id" required>
+                                    <option value="">Select Brand</option>
+                                    @foreach ($brands as $brand)
+                                        <option value="{{ $brand->id }}"
+                                            {{ old('brand_id') == $brand->id ? 'selected' : '' }}>
+                                            {{ $brand->name }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                                @error('brand_id')
+                                    <p class="invalid-feedback">{{ $message }}</p>
+                                @enderror
+                            </div>
+                            <div class="mb-3">
+                                <label for="description" class="form-label">Description</label>
+                                <textarea class="form-control @error('description') is-invalid @enderror" id="description" name="description"
+                                    placeholder="Enter product description" required>{{ old('description') }}</textarea>
+                                @error('description')
+                                    <p class="invalid-feedback">{{ $message }}</p>
+                                @enderror
+                            </div>
+                            <div class="mb-3">
+                                <label for="img" class="form-label">Image</label>
+                                <input type="file" class="form-control @error('img') is-invalid @enderror" id="img"
+                                    name="img">
+                                @error('img')
+                                    <p class="invalid-feedback">{{ $message }}</p>
+                                @enderror
+                            </div>
+                            <div class="mb-3">
+                                <label for="published_at" class="form-label">Published Date</label>
+                                <input type="date" value="{{ old('published_at') }}"
+                                    class="form-control @error('published_at') is-invalid @enderror" id="published_at"
+                                    name="published_at" required>
+                                @error('published_at')
+                                    <p class="invalid-feedback">{{ $message }}</p>
+                                @enderror
+                            </div>
+                            <div class="mb-3">
+                                <label for="price" class="form-label">Price</label>
+                                <input type="number" step="0.01" value="{{ old('price') }}"
+                                    class="form-control @error('price') is-invalid @enderror" id="price" name="price"
+                                    placeholder="Enter product price" required>
+                                @error('price')
+                                    <p class="invalid-feedback">{{ $message }}</p>
+                                @enderror
+                            </div>
+                            <div class="mb-3">
+                                <label for="featured" class="form-label">Featured</label>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="featured" name="featured"
+                                        value="1" {{ old('featured') == '1' ? 'checked' : '' }}>
+                                    <label class="form-check-label" for="featured">
+                                        Featured
+                                    </label>
+                                </div>
+                                @error('featured')
+                                    <p class="invalid-feedback">{{ $message }}</p>
+                                @enderror
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="status" class="form-label">Status</label>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="status" name="status"
+                                        value="active" {{ old('status') == 'active' ? 'checked' : '' }}>
+                                    <label class="form-check-label" for="status">
+                                        Active
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="d-grid">
+                                <button type="submit" class="btn btn-primary">Create Product</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+@endsection
