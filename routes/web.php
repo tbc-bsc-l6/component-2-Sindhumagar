@@ -3,6 +3,7 @@
 use App\Http\Controllers\admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\admin\LoginController as AdminLoginController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\CategoryContoller;
 use App\Http\Controllers\LoginController;
 use Illuminate\Support\Facades\Route;
 
@@ -42,4 +43,12 @@ Route::group(['prefix' => 'admin'], function () {
         Route::get('dashboard', [AdminDashboardController::class, 'index'])->name('admin.dashboard');
         Route::get('logout', [AdminLoginController::class, 'logout'])->name('admin.logout');
     });
+
+    // Route for category
+    Route::get('/category', [CategoryContoller::class, 'index'])->name('category.index');
+    Route::get('/category/create', [CategoryContoller::class, 'create'])->name('category.create');
+    Route::post('/category/store', [CategoryContoller::class, 'store'])->name('category.store');
+    Route::get('/category/{category}/edit', [CategoryContoller::class, 'edit'])->name('category.edit');
+    Route::put('/category/{category}', [CategoryContoller::class, 'update'])->name('category.update');
+    Route::delete('/category/{category}', [CategoryContoller::class, 'destroy'])->name('category.destroy');
 });
