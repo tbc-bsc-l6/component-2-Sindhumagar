@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\admin\LoginController as AdminLoginController;
+use App\Http\Controllers\AdminProfileController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\CategoryContoller;
@@ -69,4 +70,8 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('/product/{product}/edit', [ProductController::class, 'edit'])->name('product.edit');
     Route::put('/product/{product}', [ProductController::class, 'update'])->name('product.update');
     Route::delete('/product/{product}', [ProductController::class, 'destroy'])->name('product.destroy');
+
+    // Route for profile update
+    Route::get('profile/edit', [AdminProfileController::class, 'edit'])->name('profile.edit');
+    Route::put('profile/update', [AdminProfileController::class, 'update'])->name('profile.update');
 });

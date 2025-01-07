@@ -23,6 +23,9 @@
             <div class="collapse navbar-collapse mx-auto" id="navbarNav">
                 <ul class="navbar-nav mx-auto">
                     <li class="nav-item">
+                        <a class="nav-link" href="{{ route('admin.dashboard')}}">Dashboard</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="{{ route('category.index')}}">Category</a>
                     </li>
                     <li class="nav-item">
@@ -30,6 +33,9 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('product.index')}}">Product</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('profile.edit')}}">Profile</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link disabled" aria-disabled="true">Disabled</a>
