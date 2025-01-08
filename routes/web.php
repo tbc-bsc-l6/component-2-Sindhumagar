@@ -17,6 +17,7 @@ Route::get('/', function () {
 });
 
 Route::get('/', [ShoesController::class, 'index'])->name('home');
+Route::get('/product/{id}', [ShoesController::class, 'show'])->name('shoe.show');
 
 Route::group(['prefix' => 'account'], function () {
 
