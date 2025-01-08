@@ -8,11 +8,15 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\CategoryContoller;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ShoesController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
+
 });
+
+Route::get('/', [ShoesController::class, 'index'])->name('home');
 
 Route::group(['prefix' => 'account'], function () {
 
