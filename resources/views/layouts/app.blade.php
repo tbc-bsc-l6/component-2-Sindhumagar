@@ -31,20 +31,27 @@
                     </li>
                     @if (Auth::check())
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('account.logout')}}">logout</a>
+                            <a class="nav-link" href="{{ route('account.logout') }}">logout</a>
                         </li>
                     @else
                         <li class="nav-item">
-                        <a class="nav-link" href="{{ route('account.login')}}">login</a>
+                            <a class="nav-link" href="{{ route('account.login') }}">login</a>
                         </li>
                     @endif
                     <li class="nav-item">
-                        <a class="nav-link" href="{{route('account.register')}}">Register</a>
+                        <a class="nav-link" href="{{ route('account.register') }}">Register</a>
                     </li>
                 </ul>
             </div>
         </div>
     </nav>
+
+    @if (Session::has('success'))
+        <div class="alert alert-success" id="successMessage">{{ Session::get('success') }}</div>
+    @endif
+    @if (Session::has('error'))
+        <div class="alert alert-danger" id="errorMessage">{{ Session::get('error') }}</div>
+    @endif
 
     @yield('content')
 
@@ -57,6 +64,20 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
     </script>
+
+<script>
+    setTimeout(function() {
+        const successMessage = document.getElementById('successMessage');
+        const errorMessage = document.getElementById('errorMessage');
+
+        if (successMessage) {
+            successMessage.style.display = 'none';
+        }
+        if (errorMessage) {
+            errorMessage.style.display = 'none';
+        }
+    }, 5000);
+</script>
 </body>
 
 </html>

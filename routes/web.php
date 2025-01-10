@@ -4,10 +4,12 @@ use App\Http\Controllers\admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\admin\LoginController as AdminLoginController;
 use App\Http\Controllers\AdminProfileController;
 use App\Http\Controllers\BrandController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\CategoryContoller;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\SearchProductController;
 use App\Http\Controllers\ShoesController;
 use Illuminate\Support\Facades\Route;
 
@@ -18,6 +20,8 @@ Route::get('/', function () {
 
 Route::get('/', [ShoesController::class, 'index'])->name('home');
 Route::get('/product/{id}', [ShoesController::class, 'show'])->name('shoe.show');
+
+Route::get('/viewAllShoes', [SearchProductController::class, 'index'])->name('shoes.index');
 
 Route::group(['prefix' => 'account'], function () {
 
@@ -34,6 +38,13 @@ Route::group(['prefix' => 'account'], function () {
     Route::group(['middleware' => 'auth'], function () {
         Route::get('logout', [LoginController::class, 'logout'])->name('account.logout');
         Route::get('dashboard', [DashboardController::class, 'index'])->name('account.dashboard');
+
+        Route::get('cart/{cart}', [CartController::class, 'addToCart'])->name('addtocart');
+        Route::get('cart', [CartController::class, 'index'])->name('list.cart');
+        Route::put('/cart/{id}', [CartController::class, 'updateCart'])->name('update.cart');
+        Route::delete('/cart/{id}', [CartController::class, 'destroy'])->name('destroy.cart');
+
+
     });
 });
 

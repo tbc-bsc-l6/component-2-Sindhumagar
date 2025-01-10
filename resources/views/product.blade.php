@@ -20,6 +20,8 @@
                     {{ $product->brand->description }}</p>
                 <p>Publish on {{ $product->published_at }}</p>
                 <h5>Price: {{ $product->price }}</h5>
+                <a href="{{ route('addtocart', $product->id) }}" class="btn btn-primary w-100">Add to cart</a>
+
 
             </div>
         </div>

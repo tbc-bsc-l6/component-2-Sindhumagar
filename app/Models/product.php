@@ -11,9 +11,6 @@ class product extends Model
         return $this->belongsTo(Category::class);
     }
 
-    /**
-     * Get the author that owns the product.
-     */
     public function brand()
     {
         return $this->belongsTo(Brand::class);
