@@ -72,10 +72,10 @@
             @if ($carts->isNotEmpty())
                 <!-- Display Total Quantity and Total Price -->
                 <p>Total Qty: {{ $totalQty }} | Total Price: ${{ number_format($totalPrice, 2) }}</p>
-                {{-- <form action="{{ route('cart.checkout') }}" method="POST">
+                <form action="{{ route('cart.checkout') }}" method="POST">
                     @csrf
                     <button type="submit" class="btn btn-success w-100 mt-3">Checkout</button>
-                </form> --}}
+                </form>
             @endif
 
 

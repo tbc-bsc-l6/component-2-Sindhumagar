@@ -8,6 +8,7 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\CategoryContoller;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SearchProductController;
 use App\Http\Controllers\ShoesController;
@@ -43,6 +44,9 @@ Route::group(['prefix' => 'account'], function () {
         Route::get('cart', [CartController::class, 'index'])->name('list.cart');
         Route::put('/cart/{id}', [CartController::class, 'updateCart'])->name('update.cart');
         Route::delete('/cart/{id}', [CartController::class, 'destroy'])->name('destroy.cart');
+       
+        Route::post('/checkout', [OrderController::class, 'checkout'])->name('cart.checkout');
+
 
 
     });
@@ -86,6 +90,7 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('/product/{product}/edit', [ProductController::class, 'edit'])->name('product.edit');
     Route::put('/product/{product}', [ProductController::class, 'update'])->name('product.update');
     Route::delete('/product/{product}', [ProductController::class, 'destroy'])->name('product.destroy');
+
 
     // Route for profile update
     Route::get('profile/edit', [AdminProfileController::class, 'edit'])->name('profile.edit');

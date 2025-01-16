@@ -8,7 +8,6 @@ use Illuminate\Support\Facades\Auth;
 
 class CartController extends Controller
 {
-
     public function index()
     {
         $userId = Auth::id(); // Get the authenticated user ID
