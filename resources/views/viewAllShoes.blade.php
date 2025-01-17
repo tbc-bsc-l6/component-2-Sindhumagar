@@ -3,7 +3,7 @@
 @section('content')
 
 <div class="container my-4">
-    <h1>Products</h1>
+    <h1>Shoes</h1>
 
     <form method="GET" action="{{ route('shoes.index') }}" class="my-4">
         <div class="row">

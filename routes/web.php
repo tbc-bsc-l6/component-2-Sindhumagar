@@ -12,6 +12,7 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SearchProductController;
 use App\Http\Controllers\ShoesController;
+use App\Http\Controllers\UserPasswordController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -48,6 +49,8 @@ Route::group(['prefix' => 'account'], function () {
 
         Route::get('/order', [OrderController::class, 'viewUserOrder'])->name('order.view');
 
+        Route::put('password/update', [UserPasswordController::class, 'update'])->name('password.edit');
+        Route::get('password/edit', [UserPasswordController::class, 'edit'])->name('profile.setting');
     });
 });
 
