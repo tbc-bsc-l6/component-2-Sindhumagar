@@ -2,7 +2,6 @@
 
 @section('content')
     <div class="container">
-        <p>This is home page</p>
         <div class="feature">
             <div class="container my-5">
                 <h5>Limited Edition Shoes</h5>
@@ -25,6 +24,7 @@
 
                                     </div>
                                 </div>
+                            </div>
                         @endforeach
                     @endif
 
@@ -65,6 +65,6 @@
         </div>
 
     </div>
-    </div>
+
 
 @endsection
