@@ -12,14 +12,12 @@ class ShoesController extends Controller
         $latest_shoes = Product::with(['brand', 'category'])
             ->where('featured', false)
             ->where('status', 'active')
-            ->orderBy('published_at', 'desc')
             ->limit(4) // Fetch the latest 4 products
             ->get();
 
         $featured_shoes = Product::with(['brand', 'category'])
             ->where('featured', true)
             ->where('status', 'active')
-            ->orderBy('published_at', 'desc')
             ->limit(4) // Fetch the featured 4 products
             ->get();
 

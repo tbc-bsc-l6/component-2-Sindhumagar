@@ -49,7 +49,6 @@
                         <p><strong>Brand:</strong> {{ $product->brand->name }}</p>
                         <p><strong>Category:</strong> {{ $product->category->name }}</p>
                         <p><strong>Price:</strong> ${{ $product->price }}</p>
-                        <p><strong>Published on:</strong> {{ $product->published_at }}</p>
                         <a href="{{ route('shoe.show', $product->id) }}" class="btn btn-info w-100">View</a>
                         <a href="{{ route('addtocart', $product->id) }}" class="btn btn-primary w-100 mt-3">Add to cart</a>
                     </div>

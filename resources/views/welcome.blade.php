@@ -19,7 +19,6 @@
                                 <p><strong>Brand:</strong> {{ $shoe->brand->name }}</p>
                                 <p><strong>Category:</strong> {{ $shoe->category->name }}</p>
                                 <p><strong>Price:</strong> ${{ $shoe->price }}</p>
-                                <p><strong>Published on:</strong> {{ $shoe->published_at }}</p>
                                 <a href="{{ route('shoe.show', $shoe->id) }}" class="btn btn-info w-100">View</a>
                                 <a href="{{ route('addtocart', $shoe->id) }}" class="btn btn-primary w-100">Add to cart</a>
 
@@ -49,7 +48,6 @@
                                 <p><strong>Brand:</strong> {{ $shoe->brand->name }}</p>
                                 <p><strong>Category:</strong> {{ $shoe->category->name }}</p>
                                 <p><strong>Price:</strong> ${{ $shoe->price }}</p>
-                                <p><strong>Published on:</strong> {{ $shoe->published_at }}</p>
                                 <a href="{{ route('shoe.show', $shoe->id) }}" class="btn btn-info w-100">View</a>
                                 <a href="{{ route('addtocart', $shoe->id) }}" class="btn btn-primary w-100">Add to cart</a>
 

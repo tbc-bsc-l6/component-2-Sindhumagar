@@ -35,10 +35,10 @@
                         <a class="nav-link" href="{{ route('product.index')}}">Product</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('profile.edit')}}">Profile</a>
+                        <a class="nav-link" href="{{ route('order.index')}}">Orders</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link disabled" aria-disabled="true">Disabled</a>
+                        <a class="nav-link" href="{{ route('profile.edit')}}">Change Password</a>
                     </li>
                 </ul>
 

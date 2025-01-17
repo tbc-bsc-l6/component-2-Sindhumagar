@@ -16,7 +16,6 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
-
 });
 
 Route::get('/', [ShoesController::class, 'index'])->name('home');
@@ -44,10 +43,10 @@ Route::group(['prefix' => 'account'], function () {
         Route::get('cart', [CartController::class, 'index'])->name('list.cart');
         Route::put('/cart/{id}', [CartController::class, 'updateCart'])->name('update.cart');
         Route::delete('/cart/{id}', [CartController::class, 'destroy'])->name('destroy.cart');
-       
+
         Route::post('/checkout', [OrderController::class, 'checkout'])->name('cart.checkout');
 
-
+        Route::get('/order', [OrderController::class, 'viewUserOrder'])->name('order.view');
 
     });
 });
@@ -95,4 +94,7 @@ Route::group(['prefix' => 'admin'], function () {
     // Route for profile update
     Route::get('profile/edit', [AdminProfileController::class, 'edit'])->name('profile.edit');
     Route::put('profile/update', [AdminProfileController::class, 'update'])->name('profile.update');
+
+    // Route for all orders
+    Route::get('/order', [OrderController::class, 'allOrder'])->name('order.index');
 });

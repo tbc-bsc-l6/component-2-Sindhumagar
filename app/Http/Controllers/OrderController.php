@@ -22,8 +22,7 @@ class OrderController extends Controller
             $order = order::create([
                 'user_id' => $userId,
                 'product_id' => $cart->product_id,
-                'qty' => $cart->qty,
-                'status' => 'pending',
+                'qty' => $cart->qty
             ]);
 
         }
@@ -33,4 +32,23 @@ class OrderController extends Controller
         // Redirect with success message
         return redirect()->route('list.cart')->with('success', 'Your order has been placed successfully!');
     }
+
+    public function allOrder()
+    {
+        $orders = Order::with(['product', 'user'])->paginate(8);
+
+        return view('admin.order.list', compact('orders'));
+    }
+
+
+    public function viewUserOrder()
+    {
+        $userId = Auth::id(); // Get the authenticated user ID
+        $orders = Order::where('user_id', $userId) // Get orders for the authenticated user
+            ->with('product') // Load product details
+            ->paginate(5); // Paginate the results
+
+        return view('order', compact('orders')); // Pass orders to the view
+    }   
+
 }

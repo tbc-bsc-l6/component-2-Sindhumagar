@@ -89,15 +89,6 @@
                                 @endif
                             </div>
                             <div class="mb-3">
-                                <label for="published_at" class="form-label">Published Date</label>
-                                <input type="date" value="{{ old('published_at', $product->published_at) }}"
-                                    class="form-control @error('published_at') is-invalid @enderror" id="published_at"
-                                    name="published_at" required>
-                                @error('published_at')
-                                    <p class="invalid-feedback">{{ $message }}</p>
-                                @enderror
-                            </div>
-                            <div class="mb-3">
                                 <label for="price" class="form-label">Price</label>
                                 <input type="number" step="0.01" value="{{ old('price', $product->price) }}"
                                     class="form-control @error('price') is-invalid @enderror" id="price" name="price"
@@ -107,12 +98,12 @@
                                 @enderror
                             </div>
                             <div class="mb-3">
-                                <label for="featured" class="form-label">Featured</label>
+                                <label for="featured" class="form-label">Limited Edition</label>
                                 <div class="form-check">
                                     <input class="form-check-input" type="checkbox" id="featured" name="featured"
                                         value="1" {{ old('featured', $product->featured) == 1 ? 'checked' : '' }}>
                                     <label class="form-check-label" for="featured">
-                                        Featured
+                                        Limited Edition
                                     </label>
                                 </div>
                                 @error('featured')

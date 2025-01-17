@@ -18,48 +18,40 @@ class AdminProfileController extends Controller
         return view('admin.setting', compact('user'));
     }
 
-
-    // Update profile details (name, email, and optionally password)
     public function update(Request $request)
     {
         $user = User::findOrFail(Auth::guard('admin')->user()->id);
-    
+
         // Validation rules
         $rules = [
-            'name' => 'required|min:5|max:255',
-            'password' => 'nullable|min:8|confirmed',
-            'current_password' => 'nullable', // Make old password nullable
+            'current_password' => 'required',
+            'password' => 'required|min:5|confirmed',
         ];
-    
+
         // Validate the input
         $validator = Validator::make($request->all(), $rules);
-    
+
         if ($validator->fails()) {
             return redirect()
                 ->route('profile.edit', $user->id)
                 ->withInput()
                 ->withErrors($validator);
         }
-    
-        // If old password is provided, check if it matches the current password
-        if ($request->current_password && !Hash::check($request->current_password, $user->password)) {
+
+        // Verify the current password
+        if (!Hash::check($request->current_password, $user->password)) {
             return redirect()
                 ->route('profile.edit', $user->id)
-                ->withErrors(['current_password' => 'The old password does not match.'])
+                ->withErrors(['current_password' => 'The current password is incorrect.'])
                 ->withInput();
         }
-    
-        // Update user details
-        $user->name = $request->name;
-    
-        if (!empty($request->password)) {
-            $user->password = Hash::make($request->password);
-        }
-    
+
+        // Update the password
+        $user->password = Hash::make($request->password);
         $user->save();
-    
+
         return redirect()
             ->route('admin.dashboard')
-            ->with('success', 'User updated successfully');
+            ->with('success', 'Password updated successfully.');
     }
 }

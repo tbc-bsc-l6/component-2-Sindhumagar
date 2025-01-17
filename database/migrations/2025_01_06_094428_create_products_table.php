@@ -18,7 +18,6 @@ return new class extends Migration
             $table->foreignId('category_id')->constrained('categories')->onDelete('cascade');
             $table->text('description');
             $table->string('img');
-            $table->date('published_at');
             $table->decimal('price', 10, 2);
             $table->boolean('featured')->default(false);
             $table->enum('status', ['active', 'inactive'])->default('active');

@@ -80,15 +80,6 @@
                                 @enderror
                             </div>
                             <div class="mb-3">
-                                <label for="published_at" class="form-label">Published Date</label>
-                                <input type="date" value="{{ old('published_at') }}"
-                                    class="form-control @error('published_at') is-invalid @enderror" id="published_at"
-                                    name="published_at" required>
-                                @error('published_at')
-                                    <p class="invalid-feedback">{{ $message }}</p>
-                                @enderror
-                            </div>
-                            <div class="mb-3">
                                 <label for="price" class="form-label">Price</label>
                                 <input type="number" step="0.01" value="{{ old('price') }}"
                                     class="form-control @error('price') is-invalid @enderror" id="price" name="price"

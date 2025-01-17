@@ -47,7 +47,6 @@ class ProductController extends Controller
             'category_id' => 'required|exists:categories,id',
             'description' => 'required|min:10',
             'img' => 'required|mimes:jpeg,jpg,png,gif,svg|max:10000',
-            'published_at' => 'required|date',
             'price' => 'required|numeric|min:0'
         ];
         
@@ -68,7 +67,6 @@ class ProductController extends Controller
         $product->category_id = $request->category_id;
         $product->description = $request->description;
         $product->img = $imageName;
-        $product->published_at = $request->published_at;
         $product->price = $request->price;
         $product->featured = $request->has('featured') ? '1' : '0';
         $product->status = $request->has('status') ? 'active' : 'inActive';
@@ -118,7 +116,6 @@ class ProductController extends Controller
             'category_id' => 'required|exists:categories,id',
             'description' => 'required|min:10',
             'img' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
-            'published_at' => 'required|date',
             'price' => 'required|numeric|min:0'
         ];
 
@@ -138,7 +135,6 @@ class ProductController extends Controller
         $product->brand_id = $request->brand_id;
         $product->category_id = $request->category_id;
         $product->description = $request->description;
-        $product->published_at = $request->published_at;
         $product->price = $request->price;
         $product->featured = $request->has('featured') ? '1' : '0';
         $product->status = $request->has('status') ? 'active' : 'inActive';

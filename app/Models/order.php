@@ -16,5 +16,5 @@ class order extends Model
         return $this->belongsTo(User::class);
     }
 
-    protected $fillable = ['user_id', 'product_id', 'qty', 'status'];
+    protected $fillable = ['user_id', 'product_id', 'qty'];
 }

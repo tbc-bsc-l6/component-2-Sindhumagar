@@ -30,7 +30,6 @@
                             <th>Price</th>
                             <th>Featured</th>
                             <th>Status</th>
-                            <th>Published At</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -52,7 +51,6 @@
                                     <td>${{ number_format($product->price, 2) }}</td>
                                     <td>{{ $product->featured ? 'Yes' : 'No' }}</td>
                                     <td>{{ ucfirst($product->status) }}</td>
-                                    <td>{{ \Carbon\Carbon::parse($product->published_at)->format('d M, Y') }}</td>
                                     <td>
                                         <a href="{{ route('product.edit', $product->id) }}" class="btn btn-dark">Edit</a>
                                         <a href="#" onclick="deleteProduct({{ $product->id }});" class="btn btn-danger">Delete</a>

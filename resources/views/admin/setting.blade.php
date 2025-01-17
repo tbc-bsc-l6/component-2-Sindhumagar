@@ -16,55 +16,36 @@
                         @method('PUT')
 
                         <div class="mb-3">
-                            <label for="name" class="form-label">Name</label>
-                            <input type="text" value="{{ old('name', $user->name) }}"
-                                class="form-control @error('name') is-invalid @enderror" id="name" name="name"
-                                placeholder="Enter your name" required>
-                            @error('name')
-                                <p class="invalid-feedback">{{ $message }}</p>
-                            @enderror
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="email" class="form-label">Email</label>
-                            <input type="email" value="{{ old('email', $user->email) }}"
-                                class="form-control @error('email') is-invalid @enderror" id="email" name="email"
-                                placeholder="Enter your email" disabled required>
-                            @error('email')
-                                <p class="invalid-feedback">{{ $message }}</p>
-                            @enderror
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="current_password" class="form-label">Current Password (to change password)</label>
+                            <label for="current_password" class="form-label">Current Password</label>
                             <input type="password" class="form-control @error('current_password') is-invalid @enderror"
-                                id="current_password" name="current_password" placeholder="Enter current password">
+                                id="current_password" name="current_password" placeholder="Enter your current password" required>
                             @error('current_password')
                                 <p class="invalid-feedback">{{ $message }}</p>
                             @enderror
                         </div>
-
+                        
                         <div class="mb-3">
-                            <label for="new_password" class="form-label">New Password</label>
-                            <input type="password" class="form-control @error('new_password') is-invalid @enderror"
-                                id="new_password" name="new_password" placeholder="Enter new password">
-                            @error('new_password')
+                            <label for="password" class="form-label">New Password</label>
+                            <input type="password" class="form-control @error('password') is-invalid @enderror"
+                                id="password" name="password" placeholder="Enter your new password" required>
+                            @error('password')
                                 <p class="invalid-feedback">{{ $message }}</p>
                             @enderror
                         </div>
-
+                        
                         <div class="mb-3">
-                            <label for="new_password_confirmation" class="form-label">Confirm New Password</label>
-                            <input type="password" class="form-control @error('new_password_confirmation') is-invalid @enderror"
-                                id="new_password_confirmation" name="new_password_confirmation" placeholder="Confirm new password">
-                            @error('new_password_confirmation')
+                            <label for="password_confirmation" class="form-label">Confirm New Password</label>
+                            <input type="password" class="form-control @error('password_confirmation') is-invalid @enderror"
+                                id="password_confirmation" name="password_confirmation" placeholder="Confirm your new password" required>
+                            @error('password_confirmation')
                                 <p class="invalid-feedback">{{ $message }}</p>
                             @enderror
                         </div>
-
+                        
                         <div class="d-grid">
-                            <button type="submit" class="btn btn-primary">Update Profile</button>
+                            <button type="submit" class="btn btn-primary">Update Password</button>
                         </div>
+                        
                     </form>
                 </div>
             </div>
