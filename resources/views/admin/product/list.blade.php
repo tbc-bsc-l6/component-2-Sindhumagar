@@ -3,24 +3,25 @@
 @section('title', 'List Product - Shoes World Dashboard')
 
 @section('content')
-    <div class="container">
+    <div class="container my-5">
         @if (Session::has('success'))
             <div class="alert alert-success my-3">{{ Session::get('success') }}</div>
         @endif
-        <div class="card border-0 shadow my-5">
-            <div class="card-header bg-light">
+
+        <div class="card shadow-xl border-0">
+            <div class="card-header bg-gradient-to-r from-blue-500 via-teal-500 to-green-500 text-white">
                 <div class="row">
                     <div class="col-10">
-                        <h3 class="h5 pt-2">List of Products:</h3>
+                        <h3 class="h5 pt-2">Products List</h3>
                     </div>
-                    <div class="col-2">
-                        <a href="{{ route('product.create') }}" class="btn btn-primary">Create Product</a>
+                    <div class="col-2 text-end">
+                        <a href="{{ route('product.create') }}" class="btn btn-light rounded-pill px-4 py-2 shadow-lg">Create Product</a>
                     </div>
                 </div>
             </div>
-            <div class="card-body">
-                <table class="table">
-                    <thead>
+            <div class="card-body bg-gray-50">
+                <table class="table table-striped table-bordered shadow-sm">
+                    <thead class="bg-info text-white">
                         <tr>
                             <th>ID</th>
                             <th>Image</th>
@@ -30,13 +31,13 @@
                             <th>Price</th>
                             <th>Featured</th>
                             <th>Status</th>
-                            <th>Action</th>
+                            <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
                         @if ($products->isNotEmpty())
                             @foreach ($products as $product)
-                                <tr>
+                                <tr class="hover:bg-gray-100">
                                     <td>{{ $product->id }}</td>
                                     <td>
                                         @if ($product->img)
@@ -49,11 +50,11 @@
                                     <td>{{ $product->category->name }}</td>
                                     <td>{{ $product->brand->name }}</td>
                                     <td>${{ number_format($product->price, 2) }}</td>
-                                    <td>{{ $product->featured ? 'Yes' : 'No' }}</td>
-                                    <td>{{ ucfirst($product->status) }}</td>
-                                    <td>
-                                        <a href="{{ route('product.edit', $product->id) }}" class="btn btn-dark">Edit</a>
-                                        <a href="#" onclick="deleteProduct({{ $product->id }});" class="btn btn-danger">Delete</a>
+                                    <td><span class="badge {{ $product->featured ? 'bg-success' : 'bg-secondary' }}">{{ $product->featured ? 'Yes' : 'No' }}</span></td>
+                                    <td><span class="badge {{ $product->status == 'active' ? 'bg-success' : 'bg-warning' }}">{{ ucfirst($product->status) }}</span></td>
+                                    <td class="d-flex justify-content-start">
+                                        <a href="{{ route('product.edit', $product->id) }}" class="btn btn-outline-warning me-2 rounded-pill">Edit</a>
+                                        <a href="#" onclick="deleteProduct({{ $product->id }})" class="btn btn-outline-danger rounded-pill">Delete</a>
                                         <form id="delete-product-form-{{ $product->id }}" action="{{ route('product.destroy', $product->id) }}" method="POST" style="display: none;">
                                             @csrf
                                             @method('DELETE')
@@ -63,13 +64,14 @@
                             @endforeach
                         @else
                             <tr>
-                                <td colspan="10">No products found.</td>
+                                <td colspan="9" class="text-center">No products found.</td>
                             </tr>
                         @endif
                     </tbody>
                 </table>
+
                 <!-- Pagination Links -->
-                <div class="d-flex justify-content-center">
+                <div class="d-flex justify-content-center mt-3">
                     {{ $products->links('pagination::bootstrap-4') }}
                 </div>
             </div>

@@ -20,11 +20,35 @@ Route::get('/', function () {
 });
 
 Route::get('/', [ShoesController::class, 'index'])->name('home');
-Route::get('/product/{id}', [ShoesController::class, 'show'])->name('shoe.show');
 
 Route::get('/viewAllShoes', [SearchProductController::class, 'index'])->name('shoes.index');
 
+Route::get('/product/{id}', [ShoesController::class, 'show'])->name('shoe.show');
+
+
+
 Route::group(['prefix' => 'account'], function () {
+
+
+    Route::group(['middleware' => 'auth'], function () {
+        Route::get('dashboard', [DashboardController::class, 'index'])->name('account.dashboard');
+
+
+        Route::put('password/update', [UserPasswordController::class, 'update'])->name('password.edit');
+        Route::get('password/edit', [UserPasswordController::class, 'edit'])->name('profile.setting');
+
+
+        Route::get('cart/{cart}', [CartController::class, 'addToCart'])->name('addtocart');
+        Route::get('cart', [CartController::class, 'index'])->name('list.cart');
+        Route::put('/cart/{id}', [CartController::class, 'updateCart'])->name('update.cart');
+        Route::delete('/cart/{id}', [CartController::class, 'destroy'])->name('destroy.cart');
+
+        Route::get('/order', [OrderController::class, 'viewUserOrder'])->name('order.view');
+
+        Route::post('/checkout', [OrderController::class, 'checkout'])->name('cart.checkout');
+
+        Route::get('logout', [LoginController::class, 'logout'])->name('account.logout');
+    });
 
     //Guest Middleware
     Route::group(['middleware' => 'guest'], function () {
@@ -36,25 +60,18 @@ Route::group(['prefix' => 'account'], function () {
 
 
     //Authenticated Middleware
-    Route::group(['middleware' => 'auth'], function () {
-        Route::get('logout', [LoginController::class, 'logout'])->name('account.logout');
-        Route::get('dashboard', [DashboardController::class, 'index'])->name('account.dashboard');
 
-        Route::get('cart/{cart}', [CartController::class, 'addToCart'])->name('addtocart');
-        Route::get('cart', [CartController::class, 'index'])->name('list.cart');
-        Route::put('/cart/{id}', [CartController::class, 'updateCart'])->name('update.cart');
-        Route::delete('/cart/{id}', [CartController::class, 'destroy'])->name('destroy.cart');
-
-        Route::post('/checkout', [OrderController::class, 'checkout'])->name('cart.checkout');
-
-        Route::get('/order', [OrderController::class, 'viewUserOrder'])->name('order.view');
-
-        Route::put('password/update', [UserPasswordController::class, 'update'])->name('password.edit');
-        Route::get('password/edit', [UserPasswordController::class, 'edit'])->name('profile.setting');
-    });
 });
 
 Route::group(['prefix' => 'admin'], function () {
+
+
+    
+    //Authenticated Middleware
+    Route::group(['middleware' => 'admin.auth'], function () {
+        Route::get('dashboard', [AdminDashboardController::class, 'index'])->name('admin.dashboard');
+        Route::get('logout', [AdminLoginController::class, 'logout'])->name('admin.logout');
+    });
 
     //Guest Middleware
     Route::group(['middleware' => 'admin.guest'], function () {
@@ -62,22 +79,15 @@ Route::group(['prefix' => 'admin'], function () {
         Route::post('authenticate', [AdminLoginController::class, 'authenticate'])->name('admin.authenticate');
     });
 
+    // Route for profile update
+    Route::get('profile/edit', [AdminProfileController::class, 'edit'])->name('profile.edit');
+    Route::put('profile/update', [AdminProfileController::class, 'update'])->name('profile.update');
 
-    //Authenticated Middleware
-    Route::group(['middleware' => 'admin.auth'], function () {
-        Route::get('dashboard', [AdminDashboardController::class, 'index'])->name('admin.dashboard');
-        Route::get('logout', [AdminLoginController::class, 'logout'])->name('admin.logout');
-    });
+    // Route for all orders
+    Route::get('/order', [OrderController::class, 'allOrder'])->name('order.index');
 
-    // Route for category
-    Route::get('/category', [CategoryContoller::class, 'index'])->name('category.index');
-    Route::get('/category/create', [CategoryContoller::class, 'create'])->name('category.create');
-    Route::post('/category/store', [CategoryContoller::class, 'store'])->name('category.store');
-    Route::get('/category/{category}/edit', [CategoryContoller::class, 'edit'])->name('category.edit');
-    Route::put('/category/{category}', [CategoryContoller::class, 'update'])->name('category.update');
-    Route::delete('/category/{category}', [CategoryContoller::class, 'destroy'])->name('category.destroy');
 
-    // Route for brnad
+    // Route for brand
     Route::get('/brand', [BrandController::class, 'index'])->name('brand.index');
     Route::get('/brand/create', [BrandController::class, 'create'])->name('brand.create');
     Route::post('/brand/store', [BrandController::class, 'store'])->name('brand.store');
@@ -93,11 +103,12 @@ Route::group(['prefix' => 'admin'], function () {
     Route::put('/product/{product}', [ProductController::class, 'update'])->name('product.update');
     Route::delete('/product/{product}', [ProductController::class, 'destroy'])->name('product.destroy');
 
+    // Route for category
+    Route::get('/category', [CategoryContoller::class, 'index'])->name('category.index');
+    Route::get('/category/create', [CategoryContoller::class, 'create'])->name('category.create');
+    Route::post('/category/store', [CategoryContoller::class, 'store'])->name('category.store');
+    Route::get('/category/{category}/edit', [CategoryContoller::class, 'edit'])->name('category.edit');
+    Route::put('/category/{category}', [CategoryContoller::class, 'update'])->name('category.update');
+    Route::delete('/category/{category}', [CategoryContoller::class, 'destroy'])->name('category.destroy');
 
-    // Route for profile update
-    Route::get('profile/edit', [AdminProfileController::class, 'edit'])->name('profile.edit');
-    Route::put('profile/update', [AdminProfileController::class, 'update'])->name('profile.update');
-
-    // Route for all orders
-    Route::get('/order', [OrderController::class, 'allOrder'])->name('order.index');
 });

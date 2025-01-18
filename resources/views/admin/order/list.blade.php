@@ -3,18 +3,18 @@
 @section('title', 'List Order Product - Shoes World Dashboard')
 
 @section('content')
-    <div class="container">
-        <div class="card border-0 shadow my-5">
-            <div class="card-header bg-light">
+    <div class="container my-5">
+        <div class="card shadow-xl border-0">
+            <div class="card-header bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 text-white">
                 <div class="row">
-                    <div class="col-10">
-                        <h3 class="h5 pt-2">List of Order Products:</h3>
+                    <div class="col-12">
+                        <h3 class="h5 pt-2">List of Order Products</h3>
                     </div>
                 </div>
             </div>
-            <div class="card-body">
-                <table class="table">
-                    <thead>
+            <div class="card-body bg-gray-50">
+                <table class="table table-striped table-bordered shadow-sm">
+                    <thead class="bg-info text-white">
                         <tr>
                             <th>ID</th>
                             <th>User Name</th>
@@ -29,26 +29,27 @@
                     <tbody>
                         @if ($orders->isNotEmpty())
                             @foreach ($orders as $order)
-                                <tr>
+                                <tr class="hover:bg-gray-100">
                                     <td>{{ $order->id }}</td>
                                     <td>{{ $order->user->name }}</td>
                                     <td>{{ $order->user->email }}</td>
                                     <td>{{ $order->product->title }}</td>
                                     <td>{{ $order->qty }}</td>
-                                    <td>$ {{ $order->product->price }}</td>
-                                    <td>$ {{ $order->qty * $order->product->price }}</td>
+                                    <td>$ {{ number_format($order->product->price, 2) }}</td>
+                                    <td>$ {{ number_format($order->qty * $order->product->price, 2) }}</td>
                                     <td>{{ \Carbon\Carbon::parse($order->created_at)->format('d M, Y') }}</td>
                                 </tr>
                             @endforeach
                         @else
                             <tr>
-                                <td colspan="10">No products found.</td>
+                                <td colspan="8" class="text-center">No orders found.</td>
                             </tr>
                         @endif
                     </tbody>
                 </table>
+
                 <!-- Pagination Links -->
-                <div class="d-flex justify-content-center">
+                <div class="d-flex justify-content-center mt-3">
                     {{ $orders->links('pagination::bootstrap-4') }}
                 </div>
             </div>
